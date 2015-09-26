@@ -6,7 +6,7 @@ load(data_f,'train','train_lbl', 'valid', 'valid_lbl',  'test', 'test_lbl', 'siz
 %% data_f is the string of location path.
 
 %% ASSIGN P AND indices
-p(1) = 5;          disp(strcat('Size word vectors:',num2str(p(1))));  %% @A What?
+p(1) = 5;          disp(strcat('Size word vectors:',num2str(p(1))));  %% @A What? mag be the length of the embedding
 p(2) = sent_length; disp(strcat('Max sent length:',num2str(p(2))));
 p(3) = 3;           disp(strcat('Number feat maps in first layer:',num2str(p(3))));
 p(5) = 4;           disp(strcat('Number feat maps in second layer:', num2str(p(5))));
@@ -31,7 +31,7 @@ p(41) = 1;          disp(strcat('Dropout at First layer:',num2str(p(40))));
 p(42) = 1;          disp(strcat('Dropout at Second layer:',num2str(p(40))));
 p(43) = 1;          disp(strcat('Dropout at Third layer:',num2str(p(40))));
 
-p(51) = 3;          disp(strcat('Local Connections Span at First layer:',num2str(p(40))));
+p(51) = 3;          disp(strcat('Local Connections Span at First layer:',num2str(p(40))));  %% @Aure  width of convolutional layer ? 
 p(52) = 3;          disp(strcat('Local Connections Span at Second layer:',num2str(p(40))));
 p(53) = 3;          disp(strcat('Local Connections Span at Third layer:',num2str(p(40))));
 
@@ -65,7 +65,7 @@ end
 disp(' ')
 disp(['Layer 1: ' num2str(p(3)) ' maps of depth ' num2str(p(1)/(p(12)*1+1))])   %% @A p(3):Number feat maps in first layer--3, p(1):Size word vectors--5, p(12):Folding in first layer--0.
 if p(10) >= 2, disp(['Layer 2: ' num2str(p(5)) ' maps of depth ' num2str(p(1)/((p(12)+1)*(p(13)+1)))]), end  %% @A p(10):Number of conv layers being used--3, p(13):Folding in second layer--0.
-if p(10) == 3, disp(['Layer 3: ' num2str(p(37)) ' maps of depth ' num2str(p(1)/((p(12)+1)*(p(13)+1)*(p(35)+1)))]), end  %% @A Folding in third layer--0.
+if p(10) == 3, disp(['Layer 3: ' num2str(p(37)) ' maps of depth ' num2str(p(1)/((p(12)+1)*(p(13)+1)*(p(35)+1)))]), end  %% @A p(35) Folding in third layer--0.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

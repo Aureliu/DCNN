@@ -23,7 +23,7 @@ classdef RCTM < handle
             CR.three = 0;
             CR.three_b = 0;
             
-            CR.E = normrnd(0,0.05,[p(1),p(30)]);
+            CR.E = normrnd(0,0.05,[p(1),p(30)]);  %% @AureDi may be used to create embedding
             disp(strcat('Number of weights E:',num2str(size(CR.E))));
             disp(strcat('Size (max) sentence matrix: ', num2str(p(2)*p(1))));
              

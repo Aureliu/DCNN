@@ -4,12 +4,12 @@ function [train_msk, valid_msk, test_msk, p] = Masks(train, train_lbl, valid, va
 %% Two types of masks: one is to mask with -Inf values that are superfluous due to sentence length overhead
 %% the second is to apply differentiated k-max pooling that depends on the length of each sentene; turning superfluous values to max length of first layer
 
-%Lengths of mask independenct of tot_num_layers
-p(25) = p(2)+p(4)-1; %len of masks length+pool layer 1
+%% Lengths of mask independenct of tot_num_layers
+p(25) = p(2)+p(4)-1; %len of masks length+pool layer 1   @Aure P(2):Max sent length, p(4):Size of kernel in first layer:
 p(26) = indexMaskLen(p(2), 1, p) + p(6)-1; %len of masks length+pool layer 2
 p(27) = indexMaskLen(p(2), 2, p) + p(36)-1; %len of masks length+pool layer 3
 
-if p(10) == 1 %If one layer in total
+if p(10) == 1 %If one layer in total    @AureDi  Number of conv layers being used (1 or 2 or 3):
     train_msk=zeros(size(train,1), 2*p(25)); 
     valid_msk=zeros(size(valid,1), 2*p(25));
     test_msk=zeros(size(test,1), 2*p(25)); 
@@ -79,8 +79,8 @@ end
 function pool_size = indexMaskLen(sent_len, num_conv_layer, p)
 %Function computes pooling size for a given layer
 
-if p(10) == 1
-    pool_size = p(7); %size of final pooling layer
+if p(10) == 1               %% @AureDi p(10):Number of conv layers being used (1 or 2 or 3)
+    pool_size = p(7); %size of final pooling layer   @Aure: p(7):TOP POOLING width:
     
 elseif p(10) == 2
     if num_conv_layer == 1
