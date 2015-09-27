@@ -1,5 +1,6 @@
 classdef RCTM < handle
-    
+    %%   If a function modifies a handle object passed as an input argument,
+    %%   the modification affects the original input object.
     properties
         E;
         one; 
@@ -24,13 +25,14 @@ classdef RCTM < handle
             CR.three_b = 0;
             
             CR.E = normrnd(0,0.05,[p(1),p(30)]);  %% @AureDi may be used to create embedding
+            %% @AureDi Random arrays from the normal distribution.
             disp(strcat('Number of weights E:',num2str(size(CR.E))));
             disp(strcat('Size (max) sentence matrix: ', num2str(p(2)*p(1))));
              
             CR.one = normrnd(0,0.05,[p(1)*p(3),p(4)]);
             disp(strcat('Number of weights 1:',num2str(size(CR.one))));
             
-            if p(12)
+            if p(12)        %% foldding in the first layer
                p(1) = p(1)/2; 
             end
             
