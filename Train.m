@@ -1,3 +1,4 @@
+
 function Train(data_f)
 
 addpath(genpath('./autoDif'))       %% addpath: adds the specified folders to the top of the search path.  genpath: returns a path string includes autoDif and subfolders
@@ -108,8 +109,8 @@ disp(strcat('Batch size:',num2str(batchsize)));
 disp(strcat('Max Number of epochs:',num2str(maxEpochs)));
 
 num_batch_epochs = floor(size(train,1)/(batchsize)); %leaves last batch out at an iteration  @A floor:get the small integer
-indices = kron(1:p(1),ones(1,batchsize*p(2)+1)).'; %adding one value for consistent size of E_df
-
+indices = kron(1:p(1),ones(1,batchsize*p(2)+1)).'; %adding one value for consistent size of E_df 
+%% Return the kronecker product. 1:p(1): 1 2 ... n .   .' : transposition.
 valid_batch = reshape(valid',1,[]);
 test_batch = reshape(test',1,[]);
 
@@ -160,7 +161,9 @@ for i=1:maxEpochs
         labels = train_lbl((j-1)*batchsize+1:j*batchsize);
         mini_msk = train_msk((j-1)*batchsize+1:j*batchsize,:);
         
-        if 0, fastDerivativeCheck(@CostFunction,X,1,2, decodeInfo, minibatch, labels, mini_msk, indices, p); end
+        if 0,   %% @AureDi Did not use this method. 
+            fastDerivativeCheck(@CostFunction,X,1,2, decodeInfo, minibatch, labels, mini_msk, indices, p); 
+        end
         [cost,grad]=CostFunction(X,  decodeInfo, minibatch, labels, mini_msk, indices, p);
         
         if j <= 100 %Only print PPL at the beginning
@@ -168,8 +171,8 @@ for i=1:maxEpochs
         end
         
         gradient_hist = gradient_hist + grad.^2;
-        sq = sqrt(gradient_hist);
-        sq(sq~=0) = gamma./sq(sq~=0);
+        sq = sqrt(gradient_hist);       %% @AureDi sqrt the number
+        sq(sq~=0) = gamma./sq(sq~=0);   %% @AUreDi select the number of sq which doesn't equal to 0
         X = X-sq.*grad;
         
         %Accuracies
