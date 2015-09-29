@@ -4,6 +4,7 @@ num=0;
 
 m1 = reshape(stack(num+1:num+prod(decodeInfo(1,:))),decodeInfo(1,1),decodeInfo(1,2));
 num = num+prod(decodeInfo(1,:));
+%%  @AureDi B = prod(A) returns the product of the array elements of A
 
 m2 = reshape(stack(num+1:num+prod(decodeInfo(2,:))),decodeInfo(2,1),decodeInfo(2,2));
 num = num+prod(decodeInfo(2,:));
